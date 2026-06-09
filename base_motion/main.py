@@ -22,12 +22,12 @@ class BaseMotion(Node):
 
         self.declare_parameter("nano_addr", "/dev/ttyACM0")
 
-        self.get_parameter("nano_addr").get_parameter_value().string_value
+        self.nano_addr = self.get_parameter("nano_addr").get_parameter_value().string_value
 
-        self.front_left = CheetahMotor("front_left", FRONT_LEFT_ADDR)
-        self.back_left = CheetahMotor("back_left", BACK_LEFT_ADDR)
-        self.front_right = CheetahMotor("front_right", FRONT_RIGHT_ADDR)
-        self.back_right = CheetahMotor("back_right", BACK_RIGHT_ADDR)
+        self.front_left = CheetahMotor("front_left", FRONT_LEFT_ADDR, self.nano_addr)
+        self.back_left = CheetahMotor("back_left", BACK_LEFT_ADDR, self.nano_addr)
+        self.front_right = CheetahMotor("front_right", FRONT_RIGHT_ADDR, self.nano_addr)
+        self.back_right = CheetahMotor("back_right", BACK_RIGHT_ADDR, self.nano_addr)
 
         self.speed_mult = 0.5
 
@@ -125,9 +125,10 @@ def main(args=None):
     rclpy.shutdown()
 
 class CheetahMotor:
-    def __init__(self, name: str, motor_addr: int):
+    def __init__(self, name: str, motor_addr: int, nano_addr: int):
         self.name = name
         self.motor_addr = motor_addr
+        self.nano_addr = nano_addr
         self.direction_mult = 0.0
 
         self.ser = serial.Serial(self.nano_addr, 9600) #for example
