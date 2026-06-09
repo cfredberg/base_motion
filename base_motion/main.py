@@ -49,7 +49,7 @@ class BaseMotion(Node):
             1)
         self.speed_sub
 
-        timer_period = 1/60
+        timer_period = 1/30
         self.timer = self.create_timer(timer_period, self.send_motor_cmds)
 
     def drive_direction(self, direction_msg):
