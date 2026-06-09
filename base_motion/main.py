@@ -4,6 +4,8 @@ from rclpy.node import Node
 from std_msgs.msg import String
 from std_msgs.msg import Int8
 
+import serial
+
 FRONT_LEFT_ADDR = 0
 BACK_LEFT_ADDR = 1
 FRONT_RIGHT_ADDR = 2
