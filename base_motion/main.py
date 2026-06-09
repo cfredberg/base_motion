@@ -49,58 +49,65 @@ class BaseMotion(Node):
             1)
         self.speed_sub
 
-        timer_period = 1/30
-        self.timer = self.create_timer(timer_period, self.send_motor_cmds)
+        self.direction = "still"
+
+        # timer_period = 1/30
+        # self.timer = self.create_timer(timer_period, self.send_motor_cmds)
 
     def drive_direction(self, direction_msg):
         direction = direction_msg.data
+
+        if self.direction != direction:
+            self.direction = direction
         
-        if direction == "forward":
-            self.front_left.direction_mult = -1.0
-            self.back_left.direction_mult = -1.0
-            self.front_right.direction_mult = 1.0
-            self.back_right.direction_mult = 1.0
-        elif direction == "reverse":
-            self.front_left.direction_mult = 1.0
-            self.back_left.direction_mult = 1.0
-            self.front_right.direction_mult = -1.0
-            self.back_right.direction_mult = -1.0
-        elif direction == "forward_left":
-            self.front_left.direction_mult = -1.0*BROUD_PERCENT
-            self.back_left.direction_mult = -1.0*BROUD_PERCENT
-            self.front_right.direction_mult = 1.0
-            self.back_right.direction_mult = 1.0
-        elif direction == "forward_right":
-            self.front_left.direction_mult = -1.0
-            self.back_left.direction_mult = -1.0
-            self.front_right.direction_mult = 1.0*BROUD_PERCENT
-            self.back_right.direction_mult = 1.0*BROUD_PERCENT
-        elif direction == "reverse_left":
-            self.front_left.direction_mult = 1.0*BROUD_PERCENT
-            self.back_left.direction_mult = 1.0*BROUD_PERCENT
-            self.front_right.direction_mult = -1.0
-            self.back_right.direction_mult = -1.0
-        elif direction == "reverse_right":
-            self.front_left.direction_mult = 1.0
-            self.back_left.direction_mult = 1.0
-            self.front_right.direction_mult = -1.0*BROUD_PERCENT
-            self.back_right.direction_mult = -1.0*BROUD_PERCENT
-        elif direction == "left":
-            self.front_left.direction_mult = TIGHT_PERCENT
-            self.back_left.direction_mult = TIGHT_PERCENT
-            self.front_right.direction_mult = -TIGHT_PERCENT
-            self.back_right.direction_mult = -TIGHT_PERCENT
-        elif direction == "right":
-            self.front_left.direction_mult = -TIGHT_PERCENT
-            self.back_left.direction_mult = -TIGHT_PERCENT
-            self.front_right.direction_mult = TIGHT_PERCENT
-            self.back_right.direction_mult = TIGHT_PERCENT
-        else:
-            # direction == "still"
-            self.front_left.direction_mult = 0.0
-            self.back_left.direction_mult = 0.0
-            self.front_right.direction_mult = 0.0
-            self.back_right.direction_mult = 0.0
+            if direction == "forward":
+                self.front_left.direction_mult = -1.0
+                self.back_left.direction_mult = -1.0
+                self.front_right.direction_mult = 1.0
+                self.back_right.direction_mult = 1.0
+            elif direction == "reverse":
+                self.front_left.direction_mult = 1.0
+                self.back_left.direction_mult = 1.0
+                self.front_right.direction_mult = -1.0
+                self.back_right.direction_mult = -1.0
+            elif direction == "forward_left":
+                self.front_left.direction_mult = -1.0*BROUD_PERCENT
+                self.back_left.direction_mult = -1.0*BROUD_PERCENT
+                self.front_right.direction_mult = 1.0
+                self.back_right.direction_mult = 1.0
+            elif direction == "forward_right":
+                self.front_left.direction_mult = -1.0
+                self.back_left.direction_mult = -1.0
+                self.front_right.direction_mult = 1.0*BROUD_PERCENT
+                self.back_right.direction_mult = 1.0*BROUD_PERCENT
+            elif direction == "reverse_left":
+                self.front_left.direction_mult = 1.0*BROUD_PERCENT
+                self.back_left.direction_mult = 1.0*BROUD_PERCENT
+                self.front_right.direction_mult = -1.0
+                self.back_right.direction_mult = -1.0
+            elif direction == "reverse_right":
+                self.front_left.direction_mult = 1.0
+                self.back_left.direction_mult = 1.0
+                self.front_right.direction_mult = -1.0*BROUD_PERCENT
+                self.back_right.direction_mult = -1.0*BROUD_PERCENT
+            elif direction == "left":
+                self.front_left.direction_mult = TIGHT_PERCENT
+                self.back_left.direction_mult = TIGHT_PERCENT
+                self.front_right.direction_mult = -TIGHT_PERCENT
+                self.back_right.direction_mult = -TIGHT_PERCENT
+            elif direction == "right":
+                self.front_left.direction_mult = -TIGHT_PERCENT
+                self.back_left.direction_mult = -TIGHT_PERCENT
+                self.front_right.direction_mult = TIGHT_PERCENT
+                self.back_right.direction_mult = TIGHT_PERCENT
+            else:
+                # direction == "still"
+                self.front_left.direction_mult = 0.0
+                self.back_left.direction_mult = 0.0
+                self.front_right.direction_mult = 0.0
+                self.back_right.direction_mult = 0.0
+            
+            self.send_motor_cmds()
     
     def send_motor_cmds(self):
         for motor in self.motors_arr:
@@ -110,7 +117,9 @@ class BaseMotion(Node):
             motor.set_speed(speed)
 
     def get_speed(self, speed_msg):
-        self.speed = speed_msg.data
+        if self.speed != speed_msg.data:
+            self.speed = speed_msg.data
+            self.send_motor_cmds()
 
 
 def main(args=None):
