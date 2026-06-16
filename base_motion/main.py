@@ -22,7 +22,7 @@ class BaseMotion(Node):
     def __init__(self):
         super().__init__('base_motion')
 
-        self.declare_parameter("nano_addr", "/dev/ttyACM0")
+        self.declare_parameter("nano_addr", "/dev/serial/by-id/usb-Arduino_LLC_Arduino_Nano_Every_D2BD01B151514A4E43202020FF12235D-if00")
 
         self.nano_addr = self.get_parameter("nano_addr").get_parameter_value().string_value
 
