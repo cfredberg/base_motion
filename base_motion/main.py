@@ -142,7 +142,7 @@ class CheetahMotor:
         self.nano_addr = nano_addr
         self.direction_mult = 0.0
 
-        self.ser = serial.Serial(self.nano_addr, 9600) #for example
+        self.ser = serial.Serial(self.nano_addr, 1_000_000) #for example
 
     def set_speed(self, speed: int):
         self.ser.write(struct.pack('=bfb', ord('S'), speed, self.motor_addr))
