@@ -117,8 +117,9 @@ class BaseMotion(Node):
             motor.set_speed(speed)
 
     def get_speed(self, speed_msg):
-        if self.speed != speed_msg.data:
-            self.speed = speed_msg.data
+        speed = self.speed_mult*100
+        if speed != speed_msg.data:
+            self.speed_mult = speed_msg.data/100
             self.send_motor_cmds()
 
 
