@@ -93,11 +93,11 @@ class BaseMotion(Node):
             elif direction == "left":
                 self.front_left.direction_mult = TIGHT_PERCENT
                 self.back_left.direction_mult = TIGHT_PERCENT
-                self.front_right.direction_mult = -TIGHT_PERCENT
-                self.back_right.direction_mult = -TIGHT_PERCENT
+                self.front_right.direction_mult = TIGHT_PERCENT
+                self.back_right.direction_mult = TIGHT_PERCENT
             elif direction == "right":
-                self.front_left.direction_mult = -TIGHT_PERCENT
-                self.back_left.direction_mult = -TIGHT_PERCENT
+                self.front_left.direction_mult = TIGHT_PERCENT
+                self.back_left.direction_mult = TIGHT_PERCENT
                 self.front_right.direction_mult = TIGHT_PERCENT
                 self.back_right.direction_mult = TIGHT_PERCENT
             else:
