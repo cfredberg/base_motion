@@ -13,7 +13,7 @@ BACK_LEFT_ADDR = 2
 FRONT_RIGHT_ADDR = 1
 BACK_RIGHT_ADDR = 3
 
-BROUD_PERCENT = .5
+BROUD_PERCENT = .2
 
 TIGHT_PERCENT = .6
 
@@ -59,53 +59,53 @@ class BaseMotion(Node):
             self.direction = direction
         
             if direction == "forward":
-                self.front_left.direction_mult = -1.0
-                self.back_left.direction_mult = -1.0
-                self.front_right.direction_mult = 1.0
-                self.back_right.direction_mult = 1.0
+                self.front_left.direction_mult = 1.0
+                self.back_left.direction_mult = 1.0
+                self.front_right.direction_mult = -1.0
+                self.back_right.direction_mult = -1.0
             elif direction == "reverse":
-                self.front_left.direction_mult = 1.0
-                self.back_left.direction_mult = 1.0
-                self.front_right.direction_mult = -1.0
-                self.back_right.direction_mult = -1.0
-            elif direction == "forward_left":
-                # self.front_left.direction_mult = -1.0*BROUD_PERCENT
-                # self.back_left.direction_mult = -1.0*BROUD_PERCENT
-                self.front_left.direction_mult = 0
-                self.back_left.direction_mult = 0
-                self.front_right.direction_mult = 1.0
-                self.back_right.direction_mult = 1.0
-            elif direction == "forward_right":
                 self.front_left.direction_mult = -1.0
                 self.back_left.direction_mult = -1.0
-                # self.front_right.direction_mult = 1.0*BROUD_PERCENT
-                # self.back_right.direction_mult = 1.0*BROUD_PERCENT
-                self.front_right.direction_mult = 0
-                self.back_right.direction_mult = 0
-            elif direction == "reverse_left":
-                # self.front_left.direction_mult = 1.0*BROUD_PERCENT
-                # self.back_left.direction_mult = 1.0*BROUD_PERCENT
-                self.front_left.direction_mult = 0
-                self.back_left.direction_mult = 0
+                self.front_right.direction_mult = 1.0
+                self.back_right.direction_mult = 1.0
+            elif direction == "forward_left":
+                self.front_left.direction_mult = 1.0*BROUD_PERCENT
+                self.back_left.direction_mult = 1.0*BROUD_PERCENT
+                # self.front_left.direction_mult = 0
+                # self.back_left.direction_mult = 0
                 self.front_right.direction_mult = -1.0
                 self.back_right.direction_mult = -1.0
-            elif direction == "reverse_right":
+            elif direction == "forward_right":
                 self.front_left.direction_mult = 1.0
                 self.back_left.direction_mult = 1.0
-                self.front_right.direction_mult = 0
-                self.back_right.direction_mult = 0
-                # self.front_right.direction_mult = -1.0*BROUD_PERCENT
-                # self.back_right.direction_mult = -1.0*BROUD_PERCENT
+                self.front_right.direction_mult = -1.0*BROUD_PERCENT
+                self.back_right.direction_mult = -1.0*BROUD_PERCENT
+                # self.front_right.direction_mult = 0
+                # self.back_right.direction_mult = 0
+            elif direction == "reverse_left":
+                self.front_left.direction_mult = -1.0*BROUD_PERCENT
+                self.back_left.direction_mult = -1.0*BROUD_PERCENT
+                # self.front_left.direction_mult = 0
+                # self.back_left.direction_mult = 0
+                self.front_right.direction_mult = 1.0
+                self.back_right.direction_mult = 1.0
+            elif direction == "reverse_right":
+                self.front_left.direction_mult = -1.0
+                self.back_left.direction_mult = -1.0
+                # self.front_right.direction_mult = 0
+                # self.back_right.direction_mult = 0
+                self.front_right.direction_mult = 1.0*BROUD_PERCENT
+                self.back_right.direction_mult = 1.0*BROUD_PERCENT
             elif direction == "left":
-                self.front_left.direction_mult = TIGHT_PERCENT
-                self.back_left.direction_mult = TIGHT_PERCENT
-                self.front_right.direction_mult = TIGHT_PERCENT
-                self.back_right.direction_mult = TIGHT_PERCENT
-            elif direction == "right":
                 self.front_left.direction_mult = -TIGHT_PERCENT
                 self.back_left.direction_mult = -TIGHT_PERCENT
                 self.front_right.direction_mult = -TIGHT_PERCENT
                 self.back_right.direction_mult = -TIGHT_PERCENT
+            elif direction == "right":
+                self.front_left.direction_mult = TIGHT_PERCENT
+                self.back_left.direction_mult = TIGHT_PERCENT
+                self.front_right.direction_mult = TIGHT_PERCENT
+                self.back_right.direction_mult = TIGHT_PERCENT
             else:
                 # direction == "still"
                 self.front_left.direction_mult = 0.0
