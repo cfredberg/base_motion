@@ -25,6 +25,7 @@ setup(
     entry_points={
         'console_scripts': [
             'move_base = base_motion.main:main',
+            'dynamixels = base_motion.dynamixel:main',
         ],
     },
 )
