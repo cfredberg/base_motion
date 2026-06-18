@@ -24,7 +24,7 @@ class BaseMotion(Node):
 
         self.nano_addr = self.get_parameter("nano_addr").get_parameter_value().string_value
 
-        self.dyna_controller = DynamixelController("/dev/serial/by-id/")
+        self.dyna_controller = DynamixelController("/dev/serial/by-id/usb-FTDI_USB__-__Serial_Converter_FT4TFUT7-if00-port0")
 
         self.front_left = Dynamixel("front_left", FRONT_LEFT_ADDR, self.dyna_controller)
         self.back_left = Dynamixel("back_left", BACK_LEFT_ADDR, self.dyna_controller)
