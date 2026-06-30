@@ -47,6 +47,13 @@ class BaseMotion(Node):
             1)
         self.speed_sub
 
+        self.auto_sub = self.create_subscription(
+            Bool,
+            '/auto_on',
+            self.set_auto,
+            1)
+        self.auto_sub
+
         self.direction = "still"
 
         # timer_period = 1/30
@@ -127,6 +134,13 @@ class BaseMotion(Node):
         if speed != speed_msg.data:
             self.speed_mult = speed_msg.data/100
             self.send_motor_cmds()
+
+    def set_auto(self, auto_msg):
+        auto = auto_msg.data
+        if auto:
+            BROUD_PERCENT = 0.8
+        else:
+            BROUD_PERCENT = 0.2
 
 
 def main(args=None):
